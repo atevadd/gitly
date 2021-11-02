@@ -10,6 +10,10 @@
     <div class="search-result" v-if="result">
       <ResultCard :name="user.login" :imgUrl="user.avatar_url" v-for="user in result" :key="user.id" />
     </div>
+    <div class="empty-state" v-else-if="error === 'Failed to fetch' " >
+      <i class='bx bx-wifi-off' ></i>
+      <p>It appears that you do not have internet connection</p>
+    </div>
     <div class="empty-state" v-else>
       <i class="bx bx-search-alt"></i>
       <p>You haven't search for anything, type in the input field to begin</p>
@@ -27,11 +31,13 @@ export default {
     Input,
     ResultCard,
   },
+  emits:['search'],
   data() {
     return {
       result: null,
       clientId:'0ed705e5815fa23fa13b',
       clientSecret: '95eb90d8af643bd97c02dc881c2c38e5e91adb65',
+      error: null
     };
   },
   methods: {
@@ -49,9 +55,13 @@ export default {
       .then(data => {
         response = data.items
         this.result = response;
-        console.log(response);
+        // console.log(response);
       })
-      .catch(err => console.log(err.message))
+      .catch(err => {
+        console.log(err.message)
+        this.error = err.message
+        console.log(this.error)
+      })
     },
   },
 };
@@ -86,7 +96,7 @@ export default {
       gap: 15px;
     }
   }
-  .empty-state {
+  .empty-state, .error-state {
     width: 30%;
     margin: 60px auto;
     display: flex;

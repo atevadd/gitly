@@ -3,7 +3,7 @@
     <img :src="imgUrl" alt="" />
     <div class="card-text">
       <h2>{{ name }}</h2>
-      <router-link :to="{ name: 'User', params: { id: id } }"
+      <router-link :to="{ name: 'UserProfile', params: { userName: name } }"
         >view profile</router-link
       >
     </div>
@@ -20,6 +20,10 @@ export default {
       required: true,
       default: "John Doe",
     },
+    userId: {
+      type: Number,
+      default: 0
+    }
   },
   data() {
     return {

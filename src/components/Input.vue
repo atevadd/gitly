@@ -21,6 +21,7 @@ export default {
       value: null,
     }
   },
+  emits:['search', 'search-value'],
   methods: {
     search(value){
       this.$emit('search', value)
