@@ -65,15 +65,21 @@ header{
   }
 
   nav{
+
     a{
       color: #42b983;
       text-decoration: none;
       display: inline-block;
       margin-left: 20px;
-      transition: .25s ease;
+      padding-bottom: 5px;
+
+      &.router-link-active, &.router-link-exact-active{
+        border-bottom: 2px solid #42b983;
+        padding-bottom: 5px;
+      }
 
       &:hover{
-        text-decoration: underline;
+        border-bottom: 2px solid #42b983;
       }
     }
   }

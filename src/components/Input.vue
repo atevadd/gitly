@@ -1,8 +1,9 @@
 <template>
   <div class="input-box">
-    <!-- <label :for="label">{{ label }}</label> -->
-    <input :type="type" v-model="value" @keyup="startSearch(value)" :id="label">
-    <button @click="search(value)"><i class="bx bx-search"></i></button>
+    <form @submit.prevent="search(value)">
+      <input :type="InputType" v-model="value" @keyup="startSearch(value)" :id="label" placeholder="Type a github username">
+      <button @click="search(value)"><i class="bx bx-search"></i></button>
+    </form>
   </div>
 </template>
 
@@ -14,7 +15,7 @@ export default {
       type: String,
       default: "Name"
     },
-    type: String
+    InputType: String
   },
   data(){
     return{

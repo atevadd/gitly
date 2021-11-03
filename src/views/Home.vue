@@ -3,7 +3,7 @@
     <h1>Find a user on github</h1>
     <Input
       label="Find a user on github"
-      type="search"
+      InputType="search"
       @search="findUser($event)"
     />
 
