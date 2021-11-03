@@ -21,6 +21,11 @@ export default {
   justify-content: center;
   flex-direction: column;
 
+  @media screen and (min-width: 990px){
+    width: 60%;
+    margin: auto;
+  }
+
   i{
     font-size: 4rem;
     color: #333;

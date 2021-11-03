@@ -2,11 +2,11 @@
   <div class="user-wrapper">
     <div class="profile-details">
       <div class="img">
-        <img :src="userDetails.avatar_url" :alt="userDetails.login" />
+        <img :src="userDetails.avatar_url" :alt="userDetails.login" loading="lazy"/>
 
         <div class="user-name">
           <h2>{{ userDetails.name }}</h2>
-          <p>{{ userDetails.login }}</p>
+          <p>@{{ userDetails.login }}</p>
         </div>
       </div>
       <div class="content">
@@ -25,7 +25,7 @@
             <li><i class="bx bx-map"></i>{{ userDetails.location }}</li>
             <li>
               <i class="bx bx-globe"></i
-              ><a :href="userDetails.blog">{{ userDetails.blog }}</a>
+              ><a :href="userDetails.blog" target="_blank" rel="noopener">{{ userDetails.blog }}</a>
             </li>
           </ul>
         </div>
@@ -101,7 +101,7 @@ export default {
         )
         .then((response) => {
           this.userDetails = response.data;
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((err) => {
           console.log(err.message);
@@ -111,8 +111,8 @@ export default {
       axios
         .get(`https://api.github.com/users/${this.userName}/repos`)
         .then((response) => {
-          this.userRepos = response.data.splice(0, 3);
-          console.log(this.userRepos);
+          this.userRepos = response.data.splice(0, 5);
+          // console.log(this.userRepos);
         });
     },
   },

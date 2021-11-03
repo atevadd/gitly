@@ -1,7 +1,7 @@
 <template>
   <div class="input-box">
     <form @submit.prevent="search(value)">
-      <input :type="InputType" v-model="value" @keyup="startSearch(value)" :id="label" placeholder="Type a github username">
+      <input :type="InputType" v-model="value" @keyup="startSearch(value)" :id="label" autocomplete="off" placeholder="Type a github username">
       <button @click="search(value)"><i class="bx bx-search"></i></button>
     </form>
   </div>
