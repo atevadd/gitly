@@ -101,10 +101,10 @@ export default {
         )
         .then((response) => {
           this.userDetails = response.data;
-          // console.log(response.data);
+          console.log(response.data);
         })
         .catch((err) => {
-          console.log(err.message);
+          console.log(err);
         });
     },
     repoInformation() {

@@ -7,11 +7,21 @@
       @search="findUser($event)"
     />
 
-    <div class="search-result" v-if="result">
-      <ResultCard :name="user.login" :imgUrl="user.avatar_url" v-for="user in result" :key="user.id" />
+    <div class="container" v-if="result">
+      <div class="no-result" v-if="result.length === 0">
+        <p>😔 no user with that username found</p>
+      </div>
+      <div class="search-result" v-else>
+        <ResultCard
+          :name="user.login"
+          :imgUrl="user.avatar_url"
+          v-for="user in result"
+          :key="user.id"
+        />
+      </div>
     </div>
-    <div class="empty-state" v-else-if="error === 'Failed to fetch' " >
-      <i class='bx bx-wifi-off' ></i>
+    <div class="error-state" v-else-if="error === 'Failed to fetch'">
+      <i class="bx bx-wifi-off"></i>
       <p>It appears that you do not have internet connection</p>
     </div>
     <div class="empty-state" v-else>
@@ -31,13 +41,13 @@ export default {
     Input,
     ResultCard,
   },
-  emits:['search'],
+  emits: ["search"],
   data() {
     return {
       result: null,
-      clientId:'0ed705e5815fa23fa13b',
-      clientSecret: '95eb90d8af643bd97c02dc881c2c38e5e91adb65',
-      error: null
+      clientId: "0ed705e5815fa23fa13b",
+      clientSecret: "95eb90d8af643bd97c02dc881c2c38e5e91adb65",
+      error: null,
     };
   },
   methods: {
@@ -46,22 +56,21 @@ export default {
       console.log("Printed value");
     },
     findUser(value) {
-    
       let response;
-
-      // const profileResponse = fetch(`https://api.github.com/users/${value}?client_id=${this.clientId}&client_secret=${this.clientSecret}`)
-      const profileResponse = fetch(`https://api.github.com/search/users?q=${value}&page=1`)
-      .then(res => res.json())
-      .then(data => {
-        response = data.items
-        this.result = response;
-        // console.log(response);
-      })
-      .catch(err => {
-        console.log(err.message)
-        this.error = err.message
-        console.log(this.error)
-      })
+      const profileResponse = fetch(
+        `https://api.github.com/search/users?q=${value}&page=1`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          response = data.items;
+          this.result = response;
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.error = err.message;
+          console.log(this.error);
+        });
     },
   },
 };
@@ -80,13 +89,18 @@ export default {
     }
   }
 
+  .container{
+    width: 100%;
+  }
+
   .search-result {
     width: 95%;
     margin: 40px auto 20px;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 25px;
-    
+    // border: 1px solid;
+
     @media screen and (max-width: 480px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 15px;
@@ -96,7 +110,25 @@ export default {
       gap: 15px;
     }
   }
-  .empty-state, .error-state {
+
+  .no-result {
+      width: 50%;
+      margin: 60px auto;
+      display: block;
+
+
+      @media screen and (max-width: 480px) {
+        width: 85%;
+      }
+
+      p {
+          text-align: center;
+          font-size: 2rem;
+        }
+    }
+
+  .empty-state,
+  .error-state {
     width: 30%;
     margin: 60px auto;
     display: flex;

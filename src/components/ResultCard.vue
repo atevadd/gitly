@@ -35,13 +35,15 @@ export default {
 
 <style lang="scss" scoped>
 .search-card {
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 3px 13px rgba($color: #000000, $alpha: 0.25);
+  box-shadow: 0 3px 13px rgba($color: #000000, $alpha: 0.2);
+  border: 1px solid #aaa;
 
   img {
     width: 40px;
