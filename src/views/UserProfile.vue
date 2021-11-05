@@ -101,7 +101,7 @@ export default {
         )
         .then((response) => {
           this.userDetails = response.data;
-          console.log(response.data);
+
         })
         .catch((err) => {
           console.log(err);
@@ -116,10 +116,6 @@ export default {
         });
     },
   },
-  // mounted(){
-  //   // this.userInformation()
-  //   // this.repoInformation()
-  // }
   beforeMount() {
     this.userInformation();
     this.repoInformation();
@@ -240,6 +236,7 @@ export default {
           li {
             margin-right: 25px;
             font-size: 0.88rem;
+            text-transform: capitalize;
 
             i {
               vertical-align: middle;
